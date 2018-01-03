@@ -1,0 +1,46 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.xinjian"
+        minSdkVersion 16
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        multiDexEnabled true //当项目方法超过65536个，必须在项目里加入multiDexEnabled true，才可以继续编包
+        vectorDrawables.useSupportLibrary = true //vector图片是否使用color.xml中的资源
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:27.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation 'com.android.support:design:27.0.2'
+
+    // RxLifecycle
+    implementation 'com.trello.rxlifecycle2:rxlifecycle:2.2.1'
+    implementation 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.1'
+
+    // 带刻度的 SeekBar
+    implementation 'com.github.Jay-Goo:RangeSeekBar:v1.1.0'
+
+    // okhttp 3
+    implementation 'com.squareup.okhttp3:okhttp:3.9.0'
+    debugImplementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
+
+    // 调试工具
+    debugCompile 'com.facebook.stetho:stetho:1.5.0'
+    testCompile 'junit:junit:4.12'
+}
