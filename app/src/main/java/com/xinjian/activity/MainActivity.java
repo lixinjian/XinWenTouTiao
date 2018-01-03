@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -30,7 +29,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private static final int FRAGMENT_MEDIA = 3;
     private int position;
 
-    private long mExitTime;
+    private long mExitTime = 0;
+    private long firstClickTime = 0;
 
     private Toolbar mToolbar;
     private BottomNavigationView mBottomNavigationView;
@@ -69,6 +69,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         hideFragment(ft);
         position = index;
+        int resouseId = R.id.container;
         switch (index) {
             case FRAGMENT_NEWS:
                 mToolbar.setTitle(R.string.title_news);
@@ -78,7 +79,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                  */
                 if (mNewsTabLayout == null) {
                     mNewsTabLayout = NewsTabLayout.getInstance();
-                    ft.add(R.id.container, mNewsTabLayout, NewsTabLayout.class.getName());
+                    ft.add(resouseId, mNewsTabLayout, NewsTabLayout.class.getName());
                 } else {
                     ft.show(mNewsTabLayout);
                 }
@@ -88,7 +89,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 mToolbar.setTitle(R.string.title_photo);
                 if (mPhotoTabLayout == null) {
                     mPhotoTabLayout = PhotoTabLayout.getInstance();
-                    ft.add(R.id.container, mPhotoTabLayout, PhotoTabLayout.class.getName());
+                    ft.add(resouseId, mPhotoTabLayout, PhotoTabLayout.class.getName());
                 } else {
                     ft.show(mPhotoTabLayout);
                 }
@@ -98,7 +99,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 mToolbar.setTitle(R.string.title_video);
                 if (mVideoTabLayout == null) {
                     mVideoTabLayout = VideoTabLayout.getInstance();
-                    ft.add(R.id.container, mVideoTabLayout, VideoTabLayout.class.getName());
+                    ft.add(resouseId, mVideoTabLayout, VideoTabLayout.class.getName());
                 } else {
                     ft.show(mVideoTabLayout);
                 }
@@ -108,12 +109,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 mToolbar.setTitle(R.string.title_media);
                 if (mMediaChannelView == null) {
                     mMediaChannelView = MediaChannelView.getInstance();
-                    ft.add(R.id.container, mMediaChannelView, MediaChannelView.class.getName());
+                    ft.add(resouseId, mMediaChannelView, MediaChannelView.class.getName());
                 } else {
                     ft.show(mMediaChannelView);
                 }
         }
-
         ft.commit();
     }
 
@@ -141,6 +141,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         // recreate 时记录当前位置 (在 Manifest 已禁止 Activity 旋转,所以旋转屏幕并不会执行以下代码)
         outState.putInt(POSITION, position);
         outState.putInt(SELECT_ITEM, mBottomNavigationView.getSelectedItemId());
+        super.onSaveInstanceState(outState);
     }
 
     private void initView() {
@@ -155,11 +156,11 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 switch (item.getItemId()) {
                     case R.id.action_news:
                         showFragment(FRAGMENT_NEWS);
-//                        doubleClick(FRAGMENT_NEWS);
+                        doubleClick(FRAGMENT_NEWS);
                         break;
                     case R.id.action_photo:
                         showFragment(FRAGMENT_PHOTO);
-//                        doubleClick(FRAGMENT_PHOTO);
+                        doubleClick(FRAGMENT_PHOTO);
                         break;
                     case R.id.action_video:
                         showFragment(FRAGMENT_VIDEO);
@@ -187,7 +188,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     /**
      * 监听物理返回键,再按一次退出程序
      */
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
+    /*public boolean onKeyDown(int keyCode, KeyEvent event) {
         //判断用户是否点击了“返回键”
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             //与上次点击返回键时刻作差
@@ -203,6 +204,36 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             return true;
         }
         return super.onKeyDown(keyCode, event);
+    }*/
+    @Override
+    public void onBackPressed() {
+        long currentTime = System.currentTimeMillis();
+        if ((currentTime - mExitTime) < 2000) {
+            super.onBackPressed();
+        } else {
+            Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            mExitTime = currentTime;
+        }
+    }
+
+    public void doubleClick(int index) {
+        long secondClickTime = System.currentTimeMillis();
+        if ((secondClickTime - firstClickTime < 500)) {
+            switch (index) {
+                case FRAGMENT_NEWS:
+                    ToastUtils.showToastShort("双击666");
+//                    mNewsTabLayout.onDoubleClick();
+                    break;
+                case FRAGMENT_PHOTO:
+//                    mPhotoTabLayout.onDoubleClick();
+                    break;
+                case FRAGMENT_VIDEO:
+//                    mVideoTabLayout.onDoubleClick();
+                    break;
+            }
+        } else {
+            firstClickTime = secondClickTime;
+        }
     }
 
     /**

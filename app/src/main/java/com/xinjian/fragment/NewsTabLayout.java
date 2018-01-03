@@ -99,20 +99,6 @@ public class NewsTabLayout extends Fragment {
         fragmentList = new ArrayList<>();
         titleList = new ArrayList<>();
         titleList.add("标题1");
-        titleList.add("标题2");
-        titleList.add("标题3");
-        titleList.add("标题4");
-        titleList.add("标题5");
-        titleList.add("标题6");
-        titleList.add("标题7");
-        titleList.add("标题8");
-        fragmentList.add(new PhotoTabLayout());
-        fragmentList.add(new PhotoTabLayout());
-        fragmentList.add(new PhotoTabLayout());
-        fragmentList.add(new PhotoTabLayout());
-        fragmentList.add(new PhotoTabLayout());
-        fragmentList.add(new PhotoTabLayout());
-        fragmentList.add(new PhotoTabLayout());
         fragmentList.add(new PhotoTabLayout());
 
 
