@@ -1,6 +1,5 @@
-package com.xinjian.fragment;
+package com.xinjian.fragment.news;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
@@ -14,6 +13,7 @@ import android.widget.LinearLayout;
 
 import com.xinjian.R;
 import com.xinjian.adapter.BasePagerAdapter;
+import com.xinjian.fragment.PhotoTabLayout;
 import com.xinjian.utils.RxBus;
 import com.xinjian.utils.SettingUtil;
 import com.xinjian.utils.ToastUtils;
