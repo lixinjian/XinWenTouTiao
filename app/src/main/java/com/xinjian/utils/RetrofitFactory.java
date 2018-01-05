@@ -30,6 +30,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class RetrofitFactory {
+    private volatile static Retrofit retrofit;
 
     /**
      * 缓存机制
@@ -66,7 +67,6 @@ public class RetrofitFactory {
             }
         }
     };
-    private volatile static Retrofit retrofit;
 
     @NonNull
     public static Retrofit getRetrofit() {
