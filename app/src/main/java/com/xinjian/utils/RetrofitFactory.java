@@ -8,7 +8,7 @@ import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
 import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.xinjian.BuildConfig;
 import com.xinjian.SdkManager;
-import com.xinjian.api.INewsApi;
+import com.xinjian.api.NewsService;
 import com.xinjian.golbal.MyApplication;
 
 import java.io.File;
@@ -84,7 +84,7 @@ public class RetrofitFactory {
                     OkHttpClient.Builder builder = new OkHttpClient.Builder()
                             .cookieJar(cookieJar)
                             .cache(cache)
-                            .addInterceptor(cacheControlInterceptor)
+//                            .addInterceptor(cacheControlInterceptor)
                             .connectTimeout(10, TimeUnit.SECONDS)
                             .readTimeout(15, TimeUnit.SECONDS)
                             .writeTimeout(15, TimeUnit.SECONDS)
@@ -96,7 +96,7 @@ public class RetrofitFactory {
                     }
 
                     retrofit = new Retrofit.Builder()
-                            .baseUrl(INewsApi.HOST)
+                            .baseUrl(NewsService.baseUrl)
                             .client(builder.build())
                             .addConverterFactory(GsonConverterFactory.create())
                             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

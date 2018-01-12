@@ -1,4 +1,4 @@
-package com.xinjian.fragment.news;
+package com.xinjian.fragment;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,7 +13,8 @@ import android.widget.LinearLayout;
 
 import com.xinjian.R;
 import com.xinjian.adapter.BasePagerAdapter;
-import com.xinjian.fragment.PhotoTabLayout;
+import com.xinjian.fragment.news.KeJiFragment;
+import com.xinjian.fragment.news.NewsFragment;
 import com.xinjian.utils.RxBus;
 import com.xinjian.utils.SettingUtil;
 import com.xinjian.utils.ToastUtils;
@@ -98,58 +99,10 @@ public class NewsTabLayout extends Fragment {
 
         fragmentList = new ArrayList<>();
         titleList = new ArrayList<>();
-        titleList.add("标题1");
-        fragmentList.add(new PhotoTabLayout());
-
-
-//        List<NewsChannelBean> channelList = dao.query(1);
-//        fragmentList = new ArrayList<>();
-//        titleList = new ArrayList<>();
-//        if (channelList.size() == 0) {
-//            dao.addInitData();
-//            channelList = dao.query(Constant.NEWS_CHANNEL_ENABLE);
-//        }
-//
-//        for (NewsChannelBean bean : channelList) {
-//
-//            Fragment fragment = null;
-//            String channelId = bean.getChannelId();
-//
-//            switch (channelId) {
-//                case "essay_joke":
-//                    if (map.containsKey(channelId)) {
-//                        fragmentList.add(map.get(channelId));
-//                    } else {
-//                        fragment = JokeContentView.newInstance();
-//                        fragmentList.add(fragment);
-//                    }
-//
-//                    break;
-//                case "question_and_answer":
-//                    if (map.containsKey(channelId)) {
-//                        fragmentList.add(map.get(channelId));
-//                    } else {
-//                        fragment = WendaArticleView.newInstance();
-//                        fragmentList.add(fragment);
-//                    }
-//
-//                    break;
-//                default:
-//                    if (map.containsKey(channelId)) {
-//                        fragmentList.add(map.get(channelId));
-//                    } else {
-//                        fragment = NewsArticleView.newInstance(channelId);
-//                        fragmentList.add(fragment);
-//                    }
-//                    break;
-//            }
-//
-//            titleList.add(bean.getChannelName());
-//
-//            if (fragment != null) {
-//                map.put(channelId, fragment);
-//            }
-//        }
+//        titleList.add("标题1");
+        titleList.add("标题2");
+//        fragmentList.add(new NewsFragment());
+        fragmentList.add(new KeJiFragment());
     }
 
     @Override

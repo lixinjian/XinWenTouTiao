@@ -31,4 +31,19 @@
         <item name="tabTextAppearance">@style/TextAppearance.Design.Tab</item>
         <item name="tabSelectedTextColor">?android:textColorPrimary</item>
     </style>
+
+    <style name="popwin_anim_style">
+        <item name="android:windowEnterAnimation">@anim/trans_in_window</item>
+        <item name="android:windowExitAnimation">@anim/trans_out_window</item>
+    </style>
+
+    <style name="mProgress_circle_white" parent="@android:style/Widget.ProgressBar.Small">
+        <item name="android:indeterminateDrawable">@anim/progressbar_white</item>
+        <item name="android:indeterminateDuration">2000</item>
+        <item name="android:minWidth">22dp</item>
+        <item name="android:minHeight">22dp</item>
+        <item name="android:maxWidth">40dp</item>
+        <item name="android:maxHeight">40dp</item>
+    </style>
+
 </resources>

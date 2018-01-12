@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.xinjian.R;
 import com.xinjian.fragment.MediaChannelView;
-import com.xinjian.fragment.news.NewsTabLayout;
+import com.xinjian.fragment.NewsTabLayout;
 import com.xinjian.fragment.PhotoTabLayout;
 import com.xinjian.fragment.VideoTabLayout;
 import com.xinjian.utils.ToastUtils;
